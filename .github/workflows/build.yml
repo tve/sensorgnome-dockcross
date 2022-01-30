@@ -22,7 +22,7 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
         with:
-          # logni use access token: https://docs.docker.com/docker-hub/access-tokens/
+          # login use access token: https://docs.docker.com/docker-hub/access-tokens/
           username: ${{ env.DOCKERHUB_USER}}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
@@ -33,7 +33,7 @@ jobs:
           images: ${{ env.DOCKERHUB_USER }}/${{ env.DOCKER_IMAGE }}
           flavor: |
             latest=true
-            prefix=armv7-rpi-buster-
+            prefix=armv7-rpi-bullseye-
       
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc

@@ -1,12 +1,24 @@
-# Raspberry Pi OS used in this build is based on Debian bullseye. We need to use a version of
-# dockcross that is also based on bullseye so it uses the same compiler version and the same
+# Raspberry Pi OS used in this build is based on Debian buster. We need to use a version of
+# dockcross that is also based on buster so it uses the same compiler version and the same
 # shared library versions as will be found on the rPi.
-# The public dockcross image works for rPi OS based on bullseye
+# We end up using the last dockcross buster image, which was commit 12a662e, with some minor changes
+# applied to use GLIBC2.28 and hard-float.
 
-# public dockcross image
-FROM dockcross/linux-armv7
+# use this to pull a pre-built dockcross image
+FROM tvoneicken/linux-armv7-rpi-buster
 
-ENV DEFAULT_DOCKCROSS_IMAGE sensorgnome-armv7-rpi-bullseye
+# use this if you built your own according to the readme
+#FROM dockcross/linux-armv7-rpi-buster
+
+ENV DEFAULT_DOCKCROSS_IMAGE sensorgnome-armv7-rpi-buster
+
+# Dockcross pulls from official debian repos. Seems to work OK. The following
+# causes arm packages to be pulled from the raspberry-pi repos using the debian multiarch
+# feature instead. Commented out but kept in case that becomes necessary someday.
+#RUN sed -i -e 's/^deb/deb [arch=amd64,i386]/' /etc/apt/sources.list &&\
+#    echo 'deb [arch=armhf] http://raspbian.raspberrypi.org/raspbian/ buster main contrib non-free rpi' >>/etc/apt/sources.list
+# Add the following line after the dpkg --add-architecture:
+#    wget https://archive.raspbian.org/raspbian.public.key -O - | apt-key add - &&\
 
 # Install Raspberry PI packages needed to build our apps using the dpkg/apt multi-arch feature:
 # https://wiki.debian.org/Multiarch/HOWTO
@@ -32,7 +44,7 @@ RUN dpkg --add-architecture armhf &&\
         libsqlite3-0:armhf \
         libvamp-hostsdk3v5:armhf \
         libhwloc-plugins:armhf \
-        libmpdec3 \
+        libmpdec2 \
         libmpdec-dev \
         libudev-dev:armhf \
         libudev1:armhf \
