@@ -3,8 +3,10 @@
 # shared library versions as will be found on the rPi.
 # The public dockcross image works for rPi OS based on bullseye
 
-# public dockcross image
-FROM dockcross/linux-armv7
+# dockcross produced by TvE and uploaded to dockerhub
+FROM tvoneicken/linux-armv7-rpi-bullseye
+# local dockcross image produced according to readme
+#FROM dockcross/linux-armv7
 
 ENV DEFAULT_DOCKCROSS_IMAGE sensorgnome-armv7-rpi-bullseye
 

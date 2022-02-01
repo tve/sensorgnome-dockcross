@@ -6,7 +6,7 @@ This repo contains instructions on how to build the initial dockcross image for 
 debian bullseye and it contains a Dockerfile to build a derivative image that adds a bunch of
 libraries to the plain dockcross image.
 
-tl;dr; you can use the tvoneicken/sensorgnome-armv7-rpi-bullseye image from DockerHub.
+tl;dr; you can use the tvoneicken/sensorgnome-dockcross:armv7-rpi-bullseye-main image from DockerHub.
 
 ### Bullseye based images
 
