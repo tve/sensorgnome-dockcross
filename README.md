@@ -16,7 +16,7 @@ uses (more or less) exactly these software versions. This can be accomplished as
 
 - start with dockercross at master, which currently uses bullseye
 - replace `linux-armv7/crosstool-ng.config` with `crosstool-ng-bullseye.config-10.2-2.31`
-  in this directory.
+  found in this directory.
 - build the linux-armv7 image (`make linux-armv7`)
 
 The dockercross image thus generated is generic -- to compile anything.
